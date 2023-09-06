@@ -7,7 +7,6 @@ Este é um projeto desenvovido durante o curso de ADS para as disciplinas de Pro
 - **Back-end:** Node.js com framework Express.
 
 ## Equipe
-Equipe responsável:
 - Ézio Feitosa  - Desenvolvedor full-stack
 - Alef Natan - Dev back-end
 - Lucas Rufino - UI/UX Designer
