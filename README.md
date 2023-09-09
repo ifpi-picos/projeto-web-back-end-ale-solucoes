@@ -4,7 +4,7 @@ Este é um projeto desenvovido durante o curso de ADS para as disciplinas de Pro
 
 ## Descrição
 
-- **Front-end:**  HTML, CSS e Javascript.
+- **Front-end:**  React Js
 - **Back-end:** Node.js com framework Express.
 
 ## Equipe
