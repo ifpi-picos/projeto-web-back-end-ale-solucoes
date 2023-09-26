@@ -21,7 +21,10 @@ export const setupApp = () => {
       },
     })
   );
-
+  
+  /*app.use('/', ()=>{
+      console.log('sdjguih')
+  })*/
   app.use('/api', routes);
 
     // add routing for / path
@@ -32,8 +35,10 @@ export const setupApp = () => {
           data: {},
         });
       });
+
     
       // not found
+
       app.use((_: Request, response: Response) => {
         response.status(404).json({
           response: 'error',

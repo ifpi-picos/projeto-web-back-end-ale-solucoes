@@ -8,7 +8,7 @@ export type TUser = {
     phone: string;
     street_number: number;
     is_company: boolean;
-    deleted?: boolean;
+    deleted: boolean;
     created_at?: Date;
     updated_at?: Date;
   };
