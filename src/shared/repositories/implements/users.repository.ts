@@ -16,13 +16,38 @@ export class UsersDBRepository implements UsersRepository {
     }
     async getAll(): Promise<any>{
       try {
-        const rows = await this.conn('users').select('*').from('users').where('deleted', false);
-        return rows; // Return the rows
+        const data = await this.conn('users').select('*').from('users').where('deleted', false);
+        return data; // Return the rows
       } catch (error) {
         console.error(error); // Handle any errors
         throw error; // Optionally rethrow the error
       }
     }
+
+    async getUserByDocument(document: string): Promise<TUser> {
+
+        const data = await this.conn('users')
+          .select<TUser>('*')
+          .from('users')
+          .where('document', document)
+          .where('deleted', false)
+    
+       return data;
+       }
+
+       async deleteUserByDocument(document: string): Promise<Boolean> {
+
+        const data = await this.conn('users')
+          .select<TUser>('*')
+          .from('users')
+          .where('document', document)
+          .where('deleted', false)
+          .first()
+          .delete();
+        console.log(data);
+       return data ? true : false ;
+       }
+    
 
 
 }

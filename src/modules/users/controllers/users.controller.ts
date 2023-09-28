@@ -4,6 +4,9 @@ import { HttpCode } from '../../../shared/errors/AppError';
 import { CreateUserService } from '../services/create-user.service';
 import { UsersDBRepository } from '../../../shared/repositories/implements/users.repository';
 import { ListAllUsersService } from '../services/list-all-users.service';
+import {  GetUserByDocumentService } from '../services/get-user-by-document.service';
+import { DeleteUserByDocumentService } from '../services/delete-user-by-document.service';
+
 class UsersController {
    static async create(request: Request, response: Response) {
         const  user  = request.body as TUser;
@@ -15,15 +18,47 @@ class UsersController {
             data: {},
           });
     }
+    
     static async listAll(request: Request, response: Response){
         const listAllUsersService = new ListAllUsersService(new UsersDBRepository());
-        const dados =  await listAllUsersService.perform()
-        console.log('12')
+        const result =  await listAllUsersService.perform()
 
         response.status(HttpCode.OK).json({
-             dados
-        })
+            response: 'successfull',
+            message: 'Dados obtidos com sucesso',
+            data: result,
+          });
 
+    }
+
+    static async listOne(request: Request, response: Response){
+    
+        const getUserByDocumentService = new GetUserByDocumentService(new UsersDBRepository());
+
+        const {document} = request.params;
+        
+        const result =  await getUserByDocumentService.perform(document)
+
+        response.status(HttpCode.OK).json({
+            response: 'successfull',
+            message: 'Dados obtidos com sucesso',
+            data: result,
+          });
+    }
+
+    static async delete(request: Request, response: Response){
+    
+        const deleteUserByDocumentService = new DeleteUserByDocumentService(new UsersDBRepository());
+
+        const {document} = request.params;
+        
+        const result =  await deleteUserByDocumentService.perform(document)
+
+        response.status(HttpCode.OK).json({
+            response: 'successfull',
+            message: 'Dados obtidos com sucesso',
+            data: result,
+          });
     }
 }
 
