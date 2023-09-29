@@ -6,6 +6,7 @@ import { UsersDBRepository } from '../../../shared/repositories/implements/users
 import { ListAllUsersService } from '../services/list-all-users.service';
 import {  GetUserByDocumentService } from '../services/get-user-by-document.service';
 import { DeleteUserByDocumentService } from '../services/delete-user-by-document.service';
+import { UpdateUserByDocumentService } from '../services/update-user-by-document.service';
 
 class UsersController {
    static async create(request: Request, response: Response) {
@@ -60,6 +61,22 @@ class UsersController {
             data: result,
           });
     }
+
+    static async update(request: Request, response: Response){
+    
+      const updateUserByDocumentService = new UpdateUserByDocumentService(new UsersDBRepository());
+
+      const {document} = request.params;
+      const data = request.body;
+      console.log(data)
+      const result =  await updateUserByDocumentService.perform(document, data);
+
+      response.status(HttpCode.OK).json({
+          response: 'successfull',
+          message: 'Dados obtidos com sucesso',
+          data: result,
+        });
+  }
 }
 
 export default UsersController;

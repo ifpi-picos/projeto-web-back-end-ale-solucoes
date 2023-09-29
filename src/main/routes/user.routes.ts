@@ -7,6 +7,7 @@ router.post('/create', UsersController.create);
 router.get('/list-all', UsersController.listAll);
 router.get('/list-one/:document', UsersController.listOne);
 router.delete('/delete/:document', UsersController.delete);
+router.put('/update/:document', UsersController.update);
 
 
 export default router;

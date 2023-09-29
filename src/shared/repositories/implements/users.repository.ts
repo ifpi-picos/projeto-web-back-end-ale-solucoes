@@ -1,6 +1,6 @@
 import { UsersRepository } from "../users.repository";	
 import { Knex } from 'knex';
-import { TUser } from "./users.types";
+import { TUser, TUserUpdate } from "./users.types";
 import { localDb } from "../../database/pg-connection"
 export class UsersDBRepository implements UsersRepository {
 
@@ -47,7 +47,17 @@ export class UsersDBRepository implements UsersRepository {
         console.log(data);
        return data ? true : false ;
        }
+
+       async updateUserByDocument(document: string, data: TUserUpdate): Promise<Boolean> {
+        const result = await this.conn('users')
+          .select<TUser>('*')
+          .from('users')
+          .where('document', document)
+          .where('deleted', false)
+          .first()
+          .update(data);
+
+       return result ? true : false ;
+       }
     
-
-
 }

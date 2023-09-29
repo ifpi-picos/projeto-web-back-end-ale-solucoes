@@ -12,4 +12,16 @@ export type TUser = {
     created_at?: Date;
     updated_at?: Date;
   };
+
+export type TUserUpdate = {
+  name: string;
+  email: string;
+  password: string;
+  document: string;
+  postal_code: string;
+  phone: string;
+  street_number: number;
+  deleted: boolean;
+
+}
   
