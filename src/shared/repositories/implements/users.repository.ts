@@ -10,33 +10,30 @@ export class UsersDBRepository implements UsersRepository {
     this.conn = localDb;
   }
 
-    
     async create(user: TUser): Promise<void> {
       await this.conn('users').insert(user);
     }
-    async getAll(): Promise<any>{
-      try {
-        const data = await this.conn('users').select('*').from('users').where('deleted', false);
-        return data; // Return the rows
-      } catch (error) {
-        console.error(error); // Handle any errors
-        throw error; // Optionally rethrow the error
-      }
+
+    async getAll(): Promise<any> {
+        const data = await this.conn('users')
+        .select('*')
+        .from('users')
+        .where('deleted', false); 
+
+        return data; 
     }
 
     async getUserByDocument(document: string): Promise<TUser> {
-
         const data = await this.conn('users')
           .select<TUser>('*')
           .from('users')
           .where('document', document)
           .where('deleted', false)
     
-       return data;
+        return data;
        }
 
-       async deleteUserByDocument(document: string): Promise<Boolean> {
-
+    async deleteUserByDocument(document: string): Promise<Boolean> {
         const data = await this.conn('users')
           .select<TUser>('*')
           .from('users')
@@ -44,11 +41,11 @@ export class UsersDBRepository implements UsersRepository {
           .where('deleted', false)
           .first()
           .delete();
-        console.log(data);
-       return data ? true : false ;
+    
+        return data ? true : false ;
        }
 
-       async updateUserByDocument(document: string, data: TUserUpdate): Promise<Boolean> {
+    async updateUserByDocument(document: string, data: TUserUpdate): Promise<Boolean> {
         const result = await this.conn('users')
           .select<TUser>('*')
           .from('users')
@@ -57,7 +54,16 @@ export class UsersDBRepository implements UsersRepository {
           .first()
           .update(data);
 
-       return result ? true : false ;
+        return result ? true : false ;
        }
-    
+
+    async saveToken(document: string, token: string): Promise<void> {
+        await this.conn('users')
+          .select<TUser>('*')
+          .from('users')
+          .where('document', document)
+          .where('deleted', false)
+          .first()
+          .update(token);
+       }
 }

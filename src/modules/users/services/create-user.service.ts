@@ -1,5 +1,6 @@
 import { TUser } from "../../../shared/repositories/implements/users.types";
 import { UsersRepository } from "../../../shared/repositories/users.repository";
+import { generateToken } from "../../../shared/utils/generate-token";
 
 export class CreateUserService {
     constructor(private readonly usersRepository: UsersRepository) {}

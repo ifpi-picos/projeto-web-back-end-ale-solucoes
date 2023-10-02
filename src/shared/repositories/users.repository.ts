@@ -6,4 +6,5 @@ export interface UsersRepository {
     getUserByDocument(document: string):Promise<TUser>;
     deleteUserByDocument(document: string):Promise<Boolean>;
     updateUserByDocument(document: string, data: TUserUpdate):Promise<Boolean>;
+    saveToken(document: string, token: string):Promise<void>;
 }
