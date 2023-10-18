@@ -6,7 +6,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/create": {
+        "/api/users/create": {
             "post": {
                 "summary": "Criar um usuário",
                 "tags": ["Usuários"],
@@ -16,6 +16,51 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "number"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "document": {
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "street_number": {
+                                        "type": "number"
+                                    },
+                                    "is_company": {
+                                        "type": "boolean"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["name", "email", "password", "document"]
                             }
                         }
                     }
@@ -29,8 +74,8 @@
                     }
                 }
             }
-        },
-        "/list-all": {
+        },        
+        "/api/users/list-all": {
             "get": {
                 "summary": "Listar todos os usuários",
                 "tags": ["Usuários"],
@@ -41,7 +86,7 @@
                 }
             }
         },
-        "/list-one/{document}": {
+        "/api/users/list-one/{document}": {
             "get": {
                 "summary": "Buscar um usuário por documento",
                 "tags": ["Usuários"],
@@ -66,7 +111,7 @@
                 }
             }
         },
-        "/delete/{document}": {
+        "/api/users/delete/{document}": {
             "delete": {
                 "summary": "Excluir um usuário por documento",
                 "tags": ["Usuários"],
@@ -91,7 +136,7 @@
                 }
             }
         },
-        "/update/{document}": {
+        "/api/users/update/{document}": {
             "put": {
                 "summary": "Atualizar um usuário por documento",
                 "tags": ["Usuários"],
@@ -112,6 +157,34 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "document": {
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "street_number": {
+                                        "type": "number"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": ["name", "email", "password", "document"]
                             }
                         }
                     }
@@ -125,6 +198,6 @@
                     }
                 }
             }
-        }
+        }        
     }
 }
