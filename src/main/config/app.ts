@@ -1,6 +1,9 @@
 import express, { Application, Request, Response } from 'express';
 import routes from '../../main/config/routes';
 import rateLimit from 'express-rate-limit';
+import swaggerUI from 'swagger-ui-express';
+import swaggerDocument from "../../../swagger.json";
+
 export const setupApp = () => {
     const app: Application = express();
     
@@ -27,15 +30,16 @@ export const setupApp = () => {
   })*/
   app.use('/api', routes);
 
+  app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+
     // add routing for / path
-    app.get('/', (request: Request, response: Response) => {
+    /* app.get('/', (request: Request, response: Response) => {
         response.json({
           response: 'successfull',
           message: 'Hello World 🌍',
           data: {},
         });
-      });
-
+      }); */
     
       // not found
 
@@ -47,6 +51,8 @@ export const setupApp = () => {
           data: {},
         });
       });
+
+      
     
       return app;
 }
