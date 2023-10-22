@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export type TUser = {
     id: number;
     name: string;
@@ -8,6 +10,7 @@ export type TUser = {
     phone: string;
     street_number: number;
     is_company: boolean;
+    token: string;
     deleted: boolean;
     created_at?: Date;
     updated_at?: Date;
@@ -24,4 +27,12 @@ export type TUserUpdate = {
   deleted: boolean;
 
 }
+
+export type TTokenDecoded = {
+  document: string;
+  email: string;
+  iat: number;
+  exp: number;
+}
+
   

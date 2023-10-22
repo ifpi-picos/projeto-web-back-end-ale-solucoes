@@ -23,12 +23,13 @@ export class UsersDBRepository implements UsersRepository {
         return data; 
     }
 
-    async getUserByDocument(document: string): Promise<TUser> {
+    async getUserByDocument(document: string): Promise<TUser | undefined> {
         const data = await this.conn('users')
           .select<TUser>('*')
           .from('users')
           .where('document', document)
           .where('deleted', false)
+          .first();
     
         return data;
        }
@@ -64,6 +65,16 @@ export class UsersDBRepository implements UsersRepository {
           .where('document', document)
           .where('deleted', false)
           .first()
-          .update(token);
+          .update('token', token);
+       }
+    async verifyTokenUser(document: string): Promise<TUser | undefined> {
+        const data = await this.conn('users')
+          .select<TUser>('*')
+          .from('users')
+          .where('document', document)
+          .where('deleted', false)
+          .first()
+    
+        return data;
        }
 }

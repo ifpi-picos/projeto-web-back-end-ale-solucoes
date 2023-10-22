@@ -4,8 +4,8 @@ export class GetUserByDocumentService {
     constructor(private readonly usersRepository: UsersRepository) {}
 
     public async perform(document: string){
-        const users = await this.usersRepository.deleteUserByDocument(document)
+        const users = await this.usersRepository.getUserByDocument(document)
 
-        return users
+        return users;
       }
 }
