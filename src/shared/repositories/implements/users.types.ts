@@ -1,4 +1,4 @@
-import exp from "constants";
+
 
 export type TUser = {
     id: number;
@@ -11,7 +11,7 @@ export type TUser = {
     street_number: number;
     is_company: boolean;
     token: string;
-    deleted: boolean;
+    deleted?: boolean;
     created_at?: Date;
     updated_at?: Date;
   };

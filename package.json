@@ -4,7 +4,7 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node ./src/main/server.ts",
+    "dev": "nodemon ./src/main/server.ts",
     "start": "nodemon ./src/main/server.ts "
   },
   "keywords": [],

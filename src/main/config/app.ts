@@ -6,12 +6,15 @@ import swaggerDocument from "../../../swagger.json";
 
 export const setupApp = () => {
     const app: Application = express();
-    
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
     // app.use(loggerHttp);
-
+    app.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+    });
   // Apply the rate limiting middleware to all requests
   app.use(
     rateLimit({
@@ -25,21 +28,18 @@ export const setupApp = () => {
     })
   );
   
-  /*app.use('/', ()=>{
-      console.log('sdjguih')
-  })*/
   app.use('/api', routes);
 
-  app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
+  app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
     // add routing for / path
-    /* app.get('/', (request: Request, response: Response) => {
+     app.get('/', (request: Request, response: Response) => {
         response.json({
           response: 'successfull',
           message: 'Hello World 🌍',
           data: {},
         });
-      }); */
+      }); 
     
       // not found
 
