@@ -1,16 +1,11 @@
 {
     "version": 2,
     "builds": [
-      {
-        "src": "yarn start", 
-        "use": "@vercel/static-start" 
-      }
+      { "src": "package.json", "use": "@vercel/node" }
     ],
     "routes": [
-      {
-        "src": "/", 
-        "dest": "/" 
-      }
+      { "src": "/(.*)", "dest": "yarn start" }
     ]
   }
+  
   
