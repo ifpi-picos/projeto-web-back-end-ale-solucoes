@@ -3,7 +3,7 @@
     "builds": [
       {
         "src": "yarn start", 
-        "use": "@vercel/static-builder" 
+        "use": "@vercel/static-start" 
       }
     ],
     "routes": [
