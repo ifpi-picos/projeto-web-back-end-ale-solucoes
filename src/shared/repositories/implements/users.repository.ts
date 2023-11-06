@@ -23,22 +23,22 @@ export class UsersDBRepository implements UsersRepository {
         return data; 
     }
 
-    async getUserByDocument(document: string): Promise<TUser | undefined> {
+    async getUserByDocument(company_document: string): Promise<TUser | undefined> {
         const data = await this.conn('users')
           .select<TUser>('*')
           .from('users')
-          .where('document', document)
+          .where('company_document', company_document)
           .where('deleted', false)
           .first();
     
         return data;
        }
 
-    async deleteUserByDocument(document: string): Promise<Boolean> {
+    async deleteUserByDocument(company_document: string): Promise<Boolean> {
         const data = await this.conn('users')
           .select<TUser>('*')
           .from('users')
-          .where('document', document)
+          .where('company_document', company_document)
           .where('deleted', false)
           .first()
           .delete();
@@ -46,11 +46,11 @@ export class UsersDBRepository implements UsersRepository {
         return data ? true : false ;
        }
 
-    async updateUserByDocument(document: string, data: TUserUpdate): Promise<Boolean> {
+    async updateUserByDocument(company_document: string, data: TUserUpdate): Promise<Boolean> {
         const result = await this.conn('users')
           .select<TUser>('*')
           .from('users')
-          .where('document', document)
+          .where('company_document', company_document)
           .where('deleted', false)
           .first()
           .update(data);
@@ -58,20 +58,20 @@ export class UsersDBRepository implements UsersRepository {
         return result ? true : false ;
        }
 
-    async saveToken(document: string, token: string): Promise<void> {
+    async saveToken(company_document: string, token: string): Promise<void> {
         await this.conn('users')
           .select<TUser>('*')
           .from('users')
-          .where('document', document)
+          .where('company_document', company_document)
           .where('deleted', false)
           .first()
           .update('token', token);
        }
-    async verifyTokenUser(document: string): Promise<TUser | undefined> {
+    async verifyTokenUser(company_document: string): Promise<TUser | undefined> {
         const data = await this.conn('users')
           .select<TUser>('*')
           .from('users')
-          .where('document', document)
+          .where('company_document', company_document)
           .where('deleted', false)
           .first()
     

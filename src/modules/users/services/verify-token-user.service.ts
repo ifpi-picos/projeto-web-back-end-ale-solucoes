@@ -5,8 +5,8 @@ import { isTokenExpired } from "../../../shared/utils/verify-token";
 export class VerifyTokenUserService {
     constructor( private readonly usersRepository: UsersRepository) {}
     
-    async perform(jwtSecret:string, document: string) {
-        const user = await this.usersRepository.verifyTokenUser(document);
+    async perform(jwtSecret:string, company_document: string) {
+        const user = await this.usersRepository.verifyTokenUser(company_document);
         if(!user){
             throw new Error('Usuário não encontrado, tente novamente!');
         }

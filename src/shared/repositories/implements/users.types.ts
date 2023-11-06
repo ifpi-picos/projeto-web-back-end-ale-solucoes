@@ -2,30 +2,45 @@
 
 export type TUser = {
     id: number;
-    name: string;
     email: string;
+    company_name: string;
+    company_document: string;
     password: string;
-    document: string;
+    responsible_name: string;
+    responsible_document: string;
+    birth_date: Date;
+    street_name: string;
+    street_number: number;
+    neighborhood: string;
+    city: string;
+    state: string;
     postal_code: string;
     phone: string;
-    street_number: number;
-    is_company: boolean;
     token: string;
     deleted?: boolean;
-    created_at?: Date;
+    created_at: Date;
     updated_at?: Date;
   };
 
 export type TUserUpdate = {
-  name: string;
-  email: string;
-  password: string;
-  document: string;
-  postal_code: string;
-  phone: string;
-  street_number: number;
-  deleted: boolean;
-
+  id?: number;
+  company_name?: string;
+  company_document?: string;
+  password?: string;
+  responsible_name?: string;
+  responsible_document?: string;
+  birth_date?: Date;
+  street_name?: string;
+  street_number?: number;
+  neighborhood?: string;
+  city?: string;
+  state?: string;
+  postal_code?: string;
+  phone?: string;
+  token?: string;
+  deleted?: boolean;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export type TTokenDecoded = {

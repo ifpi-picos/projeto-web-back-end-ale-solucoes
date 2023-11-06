@@ -5,7 +5,7 @@ export class CreateUserService {
     constructor(private readonly usersRepository: UsersRepository) {}
     
     public async perform(user: TUser) {
-        const userAlreadyExists = await this.usersRepository.getUserByDocument(user.document);
+        const userAlreadyExists = await this.usersRepository.getUserByDocument(user.company_document);
         if (userAlreadyExists) {
             throw new Error('Usuário já cadastrado, tente novamente!');
         }

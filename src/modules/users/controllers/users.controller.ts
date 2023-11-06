@@ -14,10 +14,10 @@ class UsersController {
   static async login(request: Request, response: Response) {
     const loginUserService = new LoginUserService(new UsersDBRepository());
 
-    const {document, password} = request.body;
+    const {company_document, password} = request.body;
     let {jwtsecret} = request.headers;
     
-    const result = await loginUserService.perform(password, document, jwtsecret as string);
+    const result = await loginUserService.perform(password, company_document, jwtsecret as string);
 
     response.status(HttpCode.OK).json({
       response: 'successfull',
@@ -55,9 +55,9 @@ class UsersController {
     
     const getUserByDocumentService = new GetUserByDocumentService(new UsersDBRepository());
 
-    const {document} = request.params;
+    const {company_document} = request.params;
     
-    const result =  await getUserByDocumentService.perform(document)
+    const result =  await getUserByDocumentService.perform(company_document)
 
     response.status(HttpCode.OK).json({
         response: 'successfull',
@@ -70,9 +70,9 @@ class UsersController {
     
     const deleteUserByDocumentService = new DeleteUserByDocumentService(new UsersDBRepository());
 
-    const {document} = request.params;
+    const {company_document} = request.params;
     
-    const result =  await deleteUserByDocumentService.perform(document)
+    const result =  await deleteUserByDocumentService.perform(company_document)
 
     response.status(HttpCode.OK).json({
         response: 'successfull',
@@ -99,10 +99,10 @@ class UsersController {
 
   static async verifyToken(request: Request, response: Response){
     const verifyTokenUserService = new VerifyTokenUserService(new UsersDBRepository());
-    const {document} = request.params
+    const {company_document} = request.params
     let {jwtsecret} = request.headers;
 
-    const result = await verifyTokenUserService.perform(jwtsecret as string, document);
+    const result = await verifyTokenUserService.perform(jwtsecret as string, company_document);
     
     response.status(HttpCode.OK).json({
       response: 'successfull',
