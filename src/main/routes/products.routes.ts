@@ -5,5 +5,6 @@ const router = Router();
 router.post('/create', ProductsController.create);
 router.get('/list-all', ProductsController.listAll);
 router.delete('/delete/:code', ProductsController.delete);
+router.put('/update/:code', ProductsController.update);
 
 export default router;

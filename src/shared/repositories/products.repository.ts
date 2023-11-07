@@ -5,4 +5,5 @@ export interface ProductsRepository {
     getUserByCode(code: string):Promise<TProduct | undefined>;
     getAll():Promise<TProduct>;
     deleteProductByCode(code: string):Promise<Boolean>;
+    updateProductByCode(code: string, data: TProductUpdate):Promise<Boolean>;
 }

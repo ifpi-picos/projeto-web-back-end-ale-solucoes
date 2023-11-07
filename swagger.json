@@ -294,6 +294,77 @@
                     }
                 }
             }
+        },
+        "/api/products/update/{code}": {
+            "put": {
+                "summary": "Atualizar um produto por code",
+                "tags": ["Produtos"],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Código do produto a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados para atualizar o produto",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "code": {
+                                    "type": "string"
+                                  },
+                                  "product_name": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "number"
+                                  },
+                                  "unit_of_measurement": {
+                                    "type": "string"
+                                  },
+                                  "category": {
+                                    "type": "string"
+                                  },
+                                  "created_at": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "updated_at": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "deleted": {
+                                    "type": "boolean"
+                                  },
+                                  "created_by": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": ["code", "product_name", "value", "unit_of_measurement", "category"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produto atualizado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro nos dados da solicitação"
+                    }
+                }
+            }
         }                  
     }
 }

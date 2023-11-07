@@ -4,6 +4,7 @@ import { TProduct } from '../../../shared/repositories/implements/products.types
 import { CreateProductService } from '../services/create-products.service';
 import { ListAllProductsService } from '../services/list-all-products.service';
 import { DeleteProductByCodeService } from '../services/delete-product-by-code.service';
+import { UpdateProductByCodeService } from '../services/update-product-by-code.service';
 import { ProductsDBRepository } from '../../../shared/repositories/implements/products.repository';
 
 
@@ -46,6 +47,22 @@ class ProductsController {
               message: 'Dados obtidos com sucesso',
               data: result,
             });
+          }
+
+          static async update(request: Request, response: Response){
+    
+            const updateProductByCodeService = new UpdateProductByCodeService(new ProductsDBRepository());
+        
+            const {code} = request.params;
+            const data = request.body;
+        
+            const result =  await updateProductByCodeService.perform(code, data);
+        
+            response.status(HttpCode.OK).json({
+                response: 'successfull',
+                message: 'Dados obtidos com sucesso',
+                data: result,
+              });
           }
 }
 

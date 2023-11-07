@@ -4,7 +4,7 @@ import { HttpCode } from '../../../shared/errors/AppError';
 import { CreateUserService } from '../services/create-user.service';
 import { UsersDBRepository } from '../../../shared/repositories/implements/users.repository';
 import { ListAllUsersService } from '../services/list-all-users.service';
-import {  GetUserByDocumentService } from '../services/get-user-by-document.service';
+import { GetUserByDocumentService } from '../services/get-user-by-document.service';
 import { DeleteUserByDocumentService } from '../services/delete-user-by-document.service';
 import { UpdateUserByDocumentService } from '../services/update-user-by-document.service';
 import { LoginUserService } from '../services/login-user.service';

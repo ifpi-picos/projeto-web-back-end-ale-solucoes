@@ -45,4 +45,16 @@ export class ProductsDBRepository implements ProductsRepository {
       
           return data ? true : false ;
          }   
+
+         async updateProductByCode(code: string, data: TProductUpdate): Promise<Boolean> {
+          const result = await this.conn('products')
+            .select<TProduct>('*')
+            .from('products')
+            .where('code', code)
+            .where('deleted', false)
+            .first()
+            .update(data);
+  
+          return result ? true : false ;
+         }
   }
