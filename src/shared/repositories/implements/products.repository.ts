@@ -14,6 +14,15 @@ export class ProductsDBRepository implements ProductsRepository {
       async create(product: TProduct): Promise<void> {
         await this.conn('products').insert(product);
       }
+
+      async getAll(): Promise<any> {
+        const data = await this.conn('products')
+        .select('*')
+        .from('products')
+        .where('deleted', false); 
+
+        return data; 
+    }
   
       async getUserByCode(code: string): Promise<TProduct | undefined> {
           const data = await this.conn('products')

@@ -258,6 +258,17 @@
                 }
               }
             }
+        },
+        "/api/products/list-all": {
+            "get": {
+                "summary": "Listar todos os produtos",
+                "tags": ["Produtos"],
+                "responses": {
+                    "200": {
+                        "description": "Lista de produtos retornada com sucesso"
+                    }
+                }
+            }
         }                  
     }
 }
