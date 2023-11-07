@@ -269,6 +269,31 @@
                     }
                 }
             }
+        },
+        "/api/products/delete/{code}": {
+            "delete": {
+                "summary": "Excluir um produto por código",
+                "tags": ["Produtos"],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Número do código do produto a ser excluído",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Produto excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "Produto não encontrado"
+                    }
+                }
+            }
         }                  
     }
 }

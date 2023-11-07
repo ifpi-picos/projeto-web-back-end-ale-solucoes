@@ -3,6 +3,7 @@ import { HttpCode } from '../../../shared/errors/AppError';
 import { TProduct } from '../../../shared/repositories/implements/products.types';
 import { CreateProductService } from '../services/create-products.service';
 import { ListAllProductsService } from '../services/list-all-products.service';
+import { DeleteProductByCodeService } from '../services/delete-product-by-code.service';
 import { ProductsDBRepository } from '../../../shared/repositories/implements/products.repository';
 
 
@@ -31,6 +32,21 @@ class ProductsController {
           });
     
         }
+
+        static async delete(request: Request, response: Response){
+    
+          const deleteProductByCodeService = new DeleteProductByCodeService(new ProductsDBRepository());
+      
+          const {code} = request.params;
+          
+          const result =  await deleteProductByCodeService.perform(code)
+      
+          response.status(HttpCode.OK).json({
+              response: 'successfull',
+              message: 'Dados obtidos com sucesso',
+              data: result,
+            });
+          }
 }
 
 export default ProductsController;

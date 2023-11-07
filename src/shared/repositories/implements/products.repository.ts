@@ -33,4 +33,16 @@ export class ProductsDBRepository implements ProductsRepository {
       
           return data;
          }
+
+         async deleteProductByCode(code: string): Promise<Boolean> {
+          const data = await this.conn('products')
+            .select<TProduct>('*')
+            .from('products')
+            .where('code', code)
+            .where('deleted', false)
+            .first()
+            .delete();
+      
+          return data ? true : false ;
+         }   
   }
