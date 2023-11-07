@@ -74,7 +74,7 @@
                     }
                 }
             }
-        },        
+        },          
         "/api/users/list-all": {
             "get": {
                 "summary": "Listar todos os usuários",
@@ -198,6 +198,66 @@
                     }
                 }
             }
-        }        
+        },
+        "/api/products/create": {
+            "post": {
+              "summary": "Criar um produto",
+              "tags": ["Produtos"],
+              "requestBody": {
+                "description": "Dados para criar um produto",
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "product_name": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "number"
+                        },
+                        "unit_of_measurement": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "deleted": {
+                          "type": "boolean"
+                        },
+                        "created_by": {
+                          "type": "number"
+                        }
+                      },
+                      "required": ["code", "product_name", "value", "unit_of_measurement", "category"]
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "201": {
+                  "description": "Produto criado com sucesso"
+                },
+                "400": {
+                  "description": "Erro nos dados da solicitação"
+                }
+              }
+            }
+        }                  
     }
 }
