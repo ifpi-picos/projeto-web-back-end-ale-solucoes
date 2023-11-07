@@ -204,7 +204,7 @@
               "summary": "Criar um produto",
               "tags": ["Produtos"],
               "requestBody": {
-                "description": "Dados para criar um produto",
+                "description": "Dados para criar um produto (created_by precisa ser igual a um ID de Users)",
                 "required": true,
                 "content": {
                   "application/json": {
