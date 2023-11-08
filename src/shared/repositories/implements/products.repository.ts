@@ -57,4 +57,15 @@ export class ProductsDBRepository implements ProductsRepository {
   
           return result ? true : false ;
          }
+
+         async getProductByCode(code: string): Promise<TProduct | undefined> {
+          const data = await this.conn('products')
+            .select<TProduct>('*')
+            .from('products')
+            .where('code', code)
+            .where('deleted', false)
+            .first();
+      
+          return data;
+         }
   }

@@ -211,9 +211,6 @@
                     "schema": {
                       "type": "object",
                       "properties": {
-                        "id": {
-                          "type": "number"
-                        },
                         "code": {
                           "type": "string"
                         },
@@ -270,6 +267,31 @@
                 }
             }
         },
+        "/api/products/list-one/{code}": {
+            "get": {
+                "summary": "Buscar um produto por código",
+                "tags": ["Produtos"],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "Código do produto",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produto encontrado"
+                    },
+                    "404": {
+                        "description": "Produto não encontrado"
+                    }
+                }
+            }
+        },
         "/api/products/delete/{code}": {
             "delete": {
                 "summary": "Excluir um produto por código",
@@ -318,9 +340,6 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                  "id": {
-                                    "type": "number"
-                                  },
                                   "code": {
                                     "type": "string"
                                   },
@@ -365,6 +384,7 @@
                     }
                 }
             }
-        }                  
+        }
+                          
     }
 }

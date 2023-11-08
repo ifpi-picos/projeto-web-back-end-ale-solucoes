@@ -6,6 +6,7 @@ import { ListAllProductsService } from '../services/list-all-products.service';
 import { DeleteProductByCodeService } from '../services/delete-product-by-code.service';
 import { UpdateProductByCodeService } from '../services/update-product-by-code.service';
 import { ProductsDBRepository } from '../../../shared/repositories/implements/products.repository';
+import { GetProductByCodeService } from '../services/get-product-by-code.service';
 
 
 class ProductsController {
@@ -64,6 +65,21 @@ class ProductsController {
                 data: result,
               });
           }
+
+          static async listOne(request: Request, response: Response){
+    
+            const getProductByCodeService = new GetProductByCodeService(new ProductsDBRepository());
+        
+            const {code} = request.params;
+            
+            const result =  await getProductByCodeService.perform(code)
+        
+            response.status(HttpCode.OK).json({
+                response: 'successfull',
+                message: 'Dados obtidos com sucesso',
+                data: result,
+              });
+            }
 }
 
 export default ProductsController;
