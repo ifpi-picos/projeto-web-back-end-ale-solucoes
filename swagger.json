@@ -431,7 +431,7 @@
               },
               "responses": {
                 "201": {
-                  "description": "Budget criado com sucesso"
+                  "description": "Orçamento criado com sucesso"
                 },
                 "400": {
                   "description": "Erro nos dados da solicitação"
