@@ -24,11 +24,11 @@ export class BudgetsDBRepository implements BudgetsRepository {
         return data; 
     }
 
-         async deleteBudgetByCode(code: string): Promise<Boolean> {
+         async deleteBudgetById(id: number): Promise<Boolean> {
           const data = await this.conn('budgets')
             .select<TBudget>('*')
             .from('budgets')
-            .where('code', code)
+            .where('id', id)
             .where('deleted', false)
             .first()
             .delete();
@@ -36,11 +36,11 @@ export class BudgetsDBRepository implements BudgetsRepository {
           return data ? true : false ;
          }   
 
-         async updateBudgetByCode(code: string, data: TBudgetUpdate): Promise<Boolean> {
+         async updateBudgetById(id: number, data: TBudgetUpdate): Promise<Boolean> {
           const result = await this.conn('budgets')
             .select<TBudget>('*')
             .from('budgets')
-            .where('code', code)
+            .where('id', id)
             .where('deleted', false)
             .first()
             .update(data);
@@ -48,11 +48,11 @@ export class BudgetsDBRepository implements BudgetsRepository {
           return result ? true : false ;
          }
 
-         async getBudgetByCode(code: string): Promise<TBudget | undefined> {
+         async getBudgetById(id: number): Promise<TBudget | undefined> {
           const data = await this.conn('budgets')
             .select<TBudget>('*')
             .from('budgets')
-            .where('code', code)
+            .where('id', id)
             .where('deleted', false)
             .first();
       

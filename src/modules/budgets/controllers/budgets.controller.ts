@@ -3,10 +3,10 @@ import { HttpCode } from '../../../shared/errors/AppError';
 import { TBudget } from '../../../shared/repositories/implements/budgets.types';
 import { CreateBudgetService } from '../services/create-budgets.service';
 import { ListAllBudgetsService } from '../services/list-all-budgets.service';
-import { DeleteBudgetByCodeService } from '../services/delete-budget-by-code.service';
-import { UpdateBudgetByCodeService } from '../services/update-budget-by-code.service';
+import { DeleteBudgetByIdService } from '../services/delete-budget-by-id.service';
+import { UpdateBudgetByIdService } from '../services/update-budget-by-id.service';
 import { BudgetsDBRepository } from '../../../shared/repositories/implements/budgets.repository';
-import { GetBudgetByCodeService } from '../services/get-budget-by-code.service';
+import { GetBudgetByIdService } from '../services/get-budget-by-id.service';
 
 
 class BudgetsController {
@@ -37,11 +37,11 @@ class BudgetsController {
 
         static async delete(request: Request, response: Response){
     
-          const deleteBudgetByCodeService = new DeleteBudgetByCodeService(new BudgetsDBRepository());
+          const deleteBudgetByIdService = new DeleteBudgetByIdService(new BudgetsDBRepository());
       
-          const {code} = request.params;
+          const id: number = parseInt(request.params.id, 10);
           
-          const result =  await deleteBudgetByCodeService.perform(code)
+          const result =  await deleteBudgetByIdService.perform(id)
       
           response.status(HttpCode.OK).json({
               response: 'successfull',
@@ -52,12 +52,12 @@ class BudgetsController {
 
           static async update(request: Request, response: Response){
     
-            const updateBudgetByCodeService = new UpdateBudgetByCodeService(new BudgetsDBRepository());
+            const updateBudgetByIdService = new UpdateBudgetByIdService(new BudgetsDBRepository());
         
-            const {code} = request.params;
+            const id: number = parseInt(request.params.id, 10);
             const data = request.body;
-        
-            const result =  await updateBudgetByCodeService.perform(code, data);
+      
+            const result =  await updateBudgetByIdService.perform(id, data);
         
             response.status(HttpCode.OK).json({
                 response: 'successfull',
@@ -68,11 +68,11 @@ class BudgetsController {
 
           static async listOne(request: Request, response: Response){
     
-            const getBudgetByCodeService = new GetBudgetByCodeService(new BudgetsDBRepository());
+            const getBudgetByIdService = new GetBudgetByIdService(new BudgetsDBRepository());
         
-            const {code} = request.params;
+            const id: number = parseInt(request.params.id, 10);
             
-            const result =  await getBudgetByCodeService.perform(code)
+            const result =  await getBudgetByIdService.perform(id)
         
             response.status(HttpCode.OK).json({
                 response: 'successfull',

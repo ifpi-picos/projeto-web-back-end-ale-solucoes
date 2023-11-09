@@ -4,11 +4,6 @@ export class CreateBudgetService {
     constructor (private readonly budgetsRepository: BudgetsRepository) {}
 
         public async perform(budget: TBudget) {
-            const budgetAlreadyExists = await this.budgetsRepository.getBudgetByCode(budget.code);
-            if (budgetAlreadyExists) {
-                throw new Error('Orçamento já cadastrado, tente novamente!');
-            }
-    
             const budgetCreated = await this.budgetsRepository.create(
               budget
             );

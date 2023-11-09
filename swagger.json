@@ -235,10 +235,12 @@
                           "format": "date-time"
                         },
                         "deleted": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "default": false
                         },
                         "created_by": {
-                          "type": "number"
+                          "type": "number",
+                          "default": 1
                         }
                       },
                       "required": ["code", "product_name", "value", "unit_of_measurement", "category"]
@@ -364,10 +366,12 @@
                                     "format": "date-time"
                                   },
                                   "deleted": {
-                                    "type": "boolean"
+                                    "type": "boolean",
+                                    "default": false
                                   },
                                   "created_by": {
-                                    "type": "number"
+                                    "type": "number",
+                                    "default": 1
                                   }
                                 },
                                 "required": ["code", "product_name", "value", "unit_of_measurement", "category"]
@@ -378,6 +382,177 @@
                 "responses": {
                     "200": {
                         "description": "Produto atualizado com sucesso"
+                    },
+                    "400": {
+                        "description": "Erro nos dados da solicitação"
+                    }
+                }
+            }
+        },
+        "/api/budgets/create": {
+            "post": {
+              "summary": "Criar um orçamento",
+              "tags": ["Orçamentos"],
+              "requestBody": {
+                "description": "Dados para criar um Orçamento",
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "budget_pdf": {
+                        "type": "string"
+                        },
+                        "budget_name": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updated_at": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "deleted": {
+                          "type": "boolean",
+                          "default": false
+                        },
+                        "created_by": {
+                          "type": "number",
+                          "default": 1
+                        }
+                      },
+                      "required": ["budget_name"]
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "201": {
+                  "description": "Budget criado com sucesso"
+                },
+                "400": {
+                  "description": "Erro nos dados da solicitação"
+                }
+              }
+            }
+        },
+        "/api/budgets/list-all": {
+            "get": {
+                "summary": "Listar todos os orçamentos",
+                "tags": ["Orçamentos"],
+                "responses": {
+                    "200": {
+                        "description": "Lista de Orçamentos retornada com sucesso"
+                    }
+                }
+            }
+        },
+        "/api/budgets/list-one/{id}": {
+            "get": {
+                "summary": "Buscar um orçamento por id",
+                "tags": ["Orçamentos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do orçamento",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Orçamento encontrado"
+                    },
+                    "404": {
+                        "description": "Orçamento não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/budgets/delete/{id}": {
+            "delete": {
+                "summary": "Excluir um orçamento por id",
+                "tags": ["Orçamentos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do orçamento a ser excluído",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Orçameto excluído com sucesso"
+                    },
+                    "404": {
+                        "description": "Orçamento não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/budgets/update/{id}": {
+            "put": {
+                "summary": "Atualizar um orçamento por id",
+                "tags": ["Orçamentos"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do orçamento a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados para atualizar o orçamento",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                  "budget_pdf": {
+                                    "type": "string"
+                                  },  
+                                  "budget_name": {
+                                    "type": "string"
+                                  },
+                                  "created_at": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "updated_at": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  },
+                                  "deleted": {
+                                    "type": "boolean"
+                                  },
+                                  "created_by": {
+                                    "type": "number",
+                                    "default": 1
+                                  }
+                                },
+                                "required": ["budget_name"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Orçamento atualizado com sucesso"
                     },
                     "400": {
                         "description": "Erro nos dados da solicitação"
