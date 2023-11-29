@@ -9,8 +9,9 @@ export class UsersDBRepository implements UsersRepository {
   constructor() {
     this.conn = localDb;
   }
-
     async create(user: TUser): Promise<void> {
+      user.created_at = new Date();
+      const date = new Date();
       await this.conn('users').insert(user);
     }
 
@@ -47,6 +48,7 @@ export class UsersDBRepository implements UsersRepository {
        }
 
     async updateUserByDocument(company_document: string, data: TUserUpdate): Promise<Boolean> {
+        data.updated_at = new Date();
         const result = await this.conn('users')
           .select<TUser>('*')
           .from('users')

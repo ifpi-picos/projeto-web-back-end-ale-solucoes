@@ -4,9 +4,9 @@ export type TUser = {
     company_name: string;
     company_document: string;
     password: string;
+    birthday_date: string;
     responsible_name: string;
     responsible_document: string;
-    birth_date: Date;
     street_name: string;
     street_number: number;
     neighborhood: string;
@@ -27,7 +27,7 @@ export type TUserUpdate = {
   password?: string;
   responsible_name?: string;
   responsible_document?: string;
-  birth_date?: Date;
+  birthday_date?: string;
   street_name?: string;
   street_number?: number;
   neighborhood?: string;

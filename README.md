@@ -11,3 +11,7 @@ Este é um projeto desenvovido durante o curso de ADS para as disciplinas de Pro
 - Ézio Feitosa  - Desenvolvedor full-stack
 - Alef Natan - Dev back-end
 - Lucas Rufino - UI/UX Designer
+
+### npm install 
+
+- Dependencias no packge.json

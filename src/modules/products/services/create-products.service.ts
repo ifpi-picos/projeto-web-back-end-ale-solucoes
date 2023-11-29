@@ -12,6 +12,7 @@ export class CreateProductService {
             const productCreated = await this.productsRepository.create(
               product
             );
+            
             return productCreated;
         }
         
