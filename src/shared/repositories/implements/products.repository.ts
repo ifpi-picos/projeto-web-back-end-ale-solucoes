@@ -12,6 +12,7 @@ export class ProductsDBRepository implements ProductsRepository {
     }
   
       async create(product: TProduct): Promise<void> {
+        product.created_at = new Date();
         await this.conn('products').insert(product);
       }
 
@@ -39,14 +40,14 @@ export class ProductsDBRepository implements ProductsRepository {
             .select<TProduct>('*')
             .from('products')
             .where('code', code)
-            .where('deleted', false)
-            .first()
-            .delete();
+            .andWhere('deleted', false)
+            .update('deleted', true);
       
           return data ? true : false ;
          }   
 
          async updateProductByCode(code: string, data: TProductUpdate): Promise<Boolean> {
+          data.updated_at = new Date();
           const result = await this.conn('products')
             .select<TProduct>('*')
             .from('products')
