@@ -1,13 +1,17 @@
 import { TBudget } from "../../../shared/repositories/implements/budgets.types";
 import { BudgetsRepository } from "../../../shared/repositories/budgets.repository";
-export class CreateBudgetService {
-    constructor (private readonly budgetsRepository: BudgetsRepository) {}
+import { generatePdf } from "../../../shared/utils/generate-pdf";
 
-        public async perform(budget: TBudget) {
-            const budgetCreated = await this.budgetsRepository.create(
-              budget
-            );
-            return budgetCreated;
-        }
-        
+export class CreateBudgetService {
+  constructor(private readonly budgetsRepository: BudgetsRepository) { }
+
+  public async perform(budget: TBudget) {
+
+    const test= await generatePdf(budget);
+    // const budgetCreated = await this.budgetsRepository.create(
+    //   budget
+    // );
+    return true;
+  }
+
 }
