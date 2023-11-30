@@ -6,37 +6,79 @@ export function generatePdf(data: any) {
   
   const html = `
   <!DOCTYPE html>
-  <html lang="en">
+  <html lang="pt-br">
   <head>
-    <meta charset="UTF-8">
     <title>Orçamento</title>
-    <style>
-      * {
-        margin: 110;
-        padding: 110;
-        box-sizing: border-box;
-      }
-      .container {
-        width: 100%;
-        height: 100vh;
-        background-color: #f5f5f5;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
   </head>
-
   <body>
-    <div class="container">
-      <h1>Olá, ${'AQUIIII'}</h1>
-      <h2>Seu orçamento foi criado com sucesso!</h2>
-      <h3>Segue em anexo o arquivo em PDF.</h3>
-    </div>
-
+  
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2">
+          <img src="logo.png" alt="Logo da empresa">
+        </th>
+        <th colspan="3">
+          <h1>Orçamento</h1>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Data</td>
+        <td>2023-11-29</td>
+        <td>Número do orçamento</td>
+        <td>123456</td>
+      </tr>
+      <tr>
+        <td>Cliente</td>
+        <td>Fulano de Tal</td>
+        <td>Documento</td>
+        <td>123.456.789-00</td>
+      </tr>
+      <tr>
+        <td>Forma de pagamento</td>
+        <td>Dinheiro</td>
+        <td>Condições de pagamento</td>
+        <td>À vista</td>
+      </tr>
+      <tr>
+        <th>Quantidade</th>
+        <th>Nome do produto</th>
+        <th>Unidade de medida</th>
+        <th>Valor unitário</th>
+        <th>Valor total</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Caneta</td>
+        <td>Unidade</td>
+        <td>R$ 5,00</td>
+        <td>R$ 5,00</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Lápis</td>
+        <td>Unidade</td>
+        <td>R$ 3,00</td>
+        <td>R$ 6,00</td>
+      </tr>
+      <tr>
+        <td colspan="4">Valor total</td>
+        <td>R$ 11,00</td>
+      </tr>
+      <tr>
+        <td colspan="4">Desconto</td>
+        <td>R$ 2,00</td>
+      </tr>
+      <tr>
+        <td colspan="4">Valor do orçamento</td>
+        <td>R$ 9,00</td>
+      </tr>
+    </tbody>
+  </table>
   </body>
-
   </html>
   `;
 
