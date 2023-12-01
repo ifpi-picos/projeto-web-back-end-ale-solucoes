@@ -15,7 +15,7 @@ class BudgetsController {
     const budget = request.body as TBudget;
     const createBudgetsService = new CreateBudgetService(new BudgetsDBRepository());
     const result = await createBudgetsService.perform(budget);
-
+    console.log(result)
     response.status(HttpCode.OK).json({
       response: 'successfull',
       message: 'Dados obtidos com sucesso',

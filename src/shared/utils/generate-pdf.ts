@@ -1,95 +1,53 @@
 
-import * as pdf from 'html-pdf';
+// import * as pdf from 'html-pdf';
 
-export function generatePdf(data: any) {
+// export function generatePdf(data: any) {
   
   
-  const html = `
-  <!DOCTYPE html>
-  <html lang="pt-br">
-  <head>
-    <title>Orçamento</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-  
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">
-          <img src="logo.png" alt="Logo da empresa">
-        </th>
-        <th colspan="3">
-          <h1>Orçamento</h1>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Data</td>
-        <td>2023-11-29</td>
-        <td>Número do orçamento</td>
-        <td>123456</td>
-      </tr>
-      <tr>
-        <td>Cliente</td>
-        <td>Fulano de Tal</td>
-        <td>Documento</td>
-        <td>123.456.789-00</td>
-      </tr>
-      <tr>
-        <td>Forma de pagamento</td>
-        <td>Dinheiro</td>
-        <td>Condições de pagamento</td>
-        <td>À vista</td>
-      </tr>
-      <tr>
-        <th>Quantidade</th>
-        <th>Nome do produto</th>
-        <th>Unidade de medida</th>
-        <th>Valor unitário</th>
-        <th>Valor total</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Caneta</td>
-        <td>Unidade</td>
-        <td>R$ 5,00</td>
-        <td>R$ 5,00</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Lápis</td>
-        <td>Unidade</td>
-        <td>R$ 3,00</td>
-        <td>R$ 6,00</td>
-      </tr>
-      <tr>
-        <td colspan="4">Valor total</td>
-        <td>R$ 11,00</td>
-      </tr>
-      <tr>
-        <td colspan="4">Desconto</td>
-        <td>R$ 2,00</td>
-      </tr>
-      <tr>
-        <td colspan="4">Valor do orçamento</td>
-        <td>R$ 9,00</td>
-      </tr>
-    </tbody>
-  </table>
-  </body>
-  </html>
-  `;
+//   const html = `
+// <!DOCTYPE html>
+// <html>
+//   <head>
+//     <title>Orçametro - Orçamento</title>
+//     <link rel="stylesheet" type="text/css" href="Orcamento.css">
+//     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+//   </head>
+//   <body>
+//         <div id="divLogo">
+//             <img src="/orçametro.png" alt="Orçametro" id="Logo">
+//         </div>
+//         <div id="divQRCode">
+//             <img src="/qrcode.png" alt="QRCode" id="QRCode">
+//         </div>
 
-  pdf.create(html).toFile(`./src/shared/files/budgets/${'data.budget_nameEEEEE'}.pdf`, function (err, res) {
-    if (err) return console.log(err);
-    console.log(res);
-  });
+//         <div id="divDadosEmpresa">
+//             <p id="DadosEmpresa">Nome da Empresa: Fulano de Tal<br>Cnpj: 07.223.452/0001-81<br>Endereço: Rua X, 270, Bairro Y, Cidade Z, CEP 12345-78</p>
+//         </div>
+//         <div id="divDadosCliente">
+//             <p id="DadosCliente">Nome da Cliente: João da Silva<br>Documento: 123.456.789-00<br>Forma de Pagamento: Dinheiro</p>
+//         </div>
 
-  return true;
+//         <div id="Titulos">
+//             <p id="T1">Código</p>
+//             <P id="T2">Nome do Produto</P>
+//             <P id="T3">Unidade de Medida</P>
+//             <p id="T4">Quantidade</p>
+//             <p id="T5">Valor Unitário</p>
+//             <p id="T6">Valor Total</p>
+//         </div>
+
+//   </body>
+// </html>
+//   `;
+
+//   pdf.create(html).toFile(`./src/shared/files/budgets/${'data.budget_nameEEEEE'}.pdf`, function (err, res) {
+//     if (err) return console.log(err);
+//     console.log(res);
+//   });
+
+//   return true;
 
 
 
-}
+// }
 
