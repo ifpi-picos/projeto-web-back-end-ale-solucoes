@@ -25,11 +25,12 @@ export type TProductUpdate = {
 };
 
 export type TProductBudget = 
-    {
+    {   
+        id: number;
+        code: string;
         product_name: string;
-        value_unit: number;
         quantity: number;
-        value_total: number;
+        value: number ;
         unit_of_measurement: string;
         category: string;
     }

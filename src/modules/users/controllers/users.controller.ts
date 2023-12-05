@@ -55,9 +55,9 @@ class UsersController {
     
     const getUserByDocumentService = new GetUserByDocumentService(new UsersDBRepository());
 
-    const {company_document} = request.params;
-    
-    const result =  await getUserByDocumentService.perform(company_document)
+    const {id} = request.params;
+  
+    const result =  await getUserByDocumentService.perform(Number(id))
 
     response.status(HttpCode.OK).json({
         response: 'successfull',

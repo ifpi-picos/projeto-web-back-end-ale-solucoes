@@ -24,7 +24,17 @@ export class UsersDBRepository implements UsersRepository {
         return data; 
     }
 
-    async getUserByDocument(company_document: string): Promise<TUser | undefined> {
+    async getUserById(userId: number): Promise<TUser | undefined> {
+        const data = await this.conn('users')
+          .select<TUser>('*')
+          .from('users')
+          .where('id', userId)
+          .where('deleted', false)
+          .first();
+    
+        return data;
+       }
+       async getUserByDocument(company_document: string): Promise<TUser | undefined> {
         const data = await this.conn('users')
           .select<TUser>('*')
           .from('users')

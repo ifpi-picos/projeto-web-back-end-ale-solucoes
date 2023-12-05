@@ -11,8 +11,15 @@ export class BudgetsDBRepository implements BudgetsRepository {
       this.conn = localDb;
     }
   
-      async create(budget: TBudget): Promise<void> {
-        await this.conn('budgets').insert(budget);
+      async create(budget: TBudget, base64: string): Promise<void> {
+        const data = new Date();
+        await this.conn('budgets').insert({
+          budget_name: budget.budget_name,
+          created_by: budget.created_by,
+          budget_pdf: base64,
+          created_at: data,
+          value: budget.value_with_discount,
+        });
       }
 
       async getAll(): Promise<any> {

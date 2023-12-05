@@ -6,7 +6,7 @@ router.get('/verify-token/:document', UsersController.verifyToken);
 router.post('/login', UsersController.login);
 router.post('/create', UsersController.create);
 router.get('/list-all', UsersController.listAll);
-router.get('/list-one/:document', UsersController.listOne);
+router.get('/list-one/:id', UsersController.listOne);
 router.delete('/delete/:document', UsersController.delete);
 router.put('/update/:document', UsersController.update);
 

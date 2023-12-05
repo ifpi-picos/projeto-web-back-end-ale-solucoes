@@ -8,6 +8,14 @@ export class CreateBudgetService {
   constructor(private readonly budgetsRepository: BudgetsRepository) { }
 
   public async perform(budget: TBudget) {
+    const body: any = [];
+    for (let i = 0; i < budget.products.length; i++) {
+  
+      const value_total = budget.products[i].value * budget.products[i].quantity;
+
+      body.push([budget.products[i].code, budget.products[i].product_name, budget.products[i].unit_of_measurement, budget.products[i].quantity, budget.products[i].value, value_total]);
+      
+    }
     const fonts = {
       Courier: {
         normal: 'Courier',
@@ -40,60 +48,75 @@ export class CreateBudgetService {
       defaultStyle: {
         font: 'Helvetica'
       },
+      pageSize: 'A4',
+      pageMargins: [20, 20, 20, 20],
+      header: {
+        columns: [
+          {
+            image: 'src/shared/files/logo.png',
+            width: 150,
+            height: 60,
+            alignment: 'left',
+            margin: [0, 0, 0, 0],
+          },
+          ],
+      },
       content: [
-        { text: 'Orçamento', style: 'header' },
-        { text: `Nº do Orçamento: ${123}` },
-        { text: `Cliente: ${123}` },
         {
-          text: `Data: <span class="math-inline">\{new Date\(\)\.toLocaleDateString\(\)\}\` \},
-\{ text\: \`\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\` \},
-\{ text\: \`Produto\`, style\: 'header' \},
-\{ text\: \`Quantidade\`, style\: 'header' \},
-\{ text\: \`Valor Unitário\`, style\: 'header' \},
-\{ text\: \`Valor Total\`, style\: 'header' \},
-\{ text\: \`\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\` \},
-\.\.\.budget\.products\.map\(\(product\) \=\> \(\{
-text\: product\.name,
-\}\)\),
-\.\.\.budget\.products\.map\(\(product\) \=\> \(\{
-text\: product\.quantity\.toString\(\),
-\}\)\),
-\.\.\.budget\.products\.map\(\(product\) \=\> \(\{
-text\: product\.price\.toString\(\),
-alignment\: 'right'
-\}\)\),
-\.\.\.budget\.products\.map\(\(product\) \=\> \(\{
-text\: \(product\.quantity \* product\.price\)\.toFixed\(2\),
-alignment\: 'right'
-\}\)\),
-\{ text\: \`\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\` \},
-\{ text\: \`Subtotal\: R</span> <span class="math-inline">\{budget\.products\.reduce\(\(sum, product\) \=\> sum \+ product\.price \* product\.quantity, 0\)\.toFixed\(2\)\}\`, style\: 'subheader' \},
-\{ text\: \`Desconto\: R</span> <span class="math-inline">\{budget\.discount\.toFixed\(2\)\}\`, style\: 'subheader' \},
-\{ text\: \`Total\: R</span> ${123}`, style: 'header'
+          columns: [
+            {
+              text: `Nome da Empresa: ${budget.company_name}\nCnpj: ${budget.company_document}\nEndereço: ${budget.company_street}, ${budget.company_number}, ${budget.company_neiborhood}, ${budget.company_city}, ${budget.company_state}, CEP ${budget.company_postal_code}`,
+              alignment: 'left',
+              marginTop: 75,
+            },
+            {
+              text: `Nome da Cliente: ${budget.client_name}\nDocumento: ${budget.client_document}\nForma de Pagamento: ${budget.payment_method}`,
+              alignment: 'right',
+              marginTop: 75,
+              marginBottom: 50,
+            }
+          ]
         },
+        {
+          style: {
+            alignment: 'center',
+          },
+          table: {
+            body: [[{text: 'Cod.', style:'columnsTitle'}, {text: 'Produto', style:'columnsTitle'}, {text: 'Unid. de Medida', style:'columnsTitle'}, {text: 'Quantidade', style:'columnsTitle'}, {text: 'Valor Unit.', style:'columnsTitle'}, {text: 'Valor Total', style:'columnsTitle'}], ...body],
+          },
+        },
+        {
+          'text': '\n\n\n',
+        },
+        {
+          style: {
+            alignment: 'right',
+            marginTop: 15,
+          },
+          table: {
+            body: [[{text: 'Subtotal', style: {fillColor: '#1475a2', color: '#fff'}}, `R$ ${budget.value_total.toFixed(2)}`], [{text: 'Desconto', style: {fillColor: '#1475a2', color: '#fff'}},`R$ ${(budget.value_total - budget.value_with_discount).toFixed(2)}`], [{text: 'Valor', style: {fillColor: '#1475a2', color: '#fff'}},`R$ ${budget.value_with_discount.toFixed(2)}`]],
 
-        { text: `---------------------------------------------------------------------------------------` },
-
-        { text: `Assinatura do Cliente`, style: 'left' },
-        { text: `Assinatura da Empresa`, style: 'right'},
-
-        { text: `Orçamento gerado por orçamento.com.br`, style: 'right' },
+          }
+        }
+        
       ],
+      footer: {
+        columns: [
+          {
+            text: 'Orçamento gerado por: orçametro.com.br',
+            alignment: 'right',
+            marginRight: 10,
+          },
+        ],
+      },
       styles: {
-        header: {
-          fontSize: 14,
-          bold: true
+        columnsTitle: {
+          bold: true,
+          alignment: 'center',
+          fillColor: '#1475a2',
+          color: '#fff',
         },
-        subheader: {
-          fontSize: 12
-        },
-        left: {
-          alignment: 'left'       
-        },
-        right: {
-          alignment: 'right'       
-        },
-  }
+  },
 };
 
 const pdfDoc = printer.createPdfKitDocument(
@@ -111,6 +134,9 @@ pdfDoc.on('end', () => {
   
 }
 );
+
+
+
 const base64 = await new Promise((resolve, reject) => {
   pdfDoc.on('end', () => {
     const result = Buffer.concat(chunks).toString('base64');
@@ -121,13 +147,16 @@ const base64 = await new Promise((resolve, reject) => {
   });
 });
 
-pdfDoc.pipe(fs.createWriteStream('document.pdf', { encoding: 'base64' }));
+pdfDoc.pipe(fs.createWriteStream('document.pdf'));
 
-// const test= await generatePdf(budget);
-// const budgetCreated = await this.budgetsRepository.create(
-//   budget
-// );
-return base64;
+
+const budgetCreated = await this.budgetsRepository.create(
+  budget,
+  base64 as string,
+);
+
+
+  return base64;
   }
 
 }
