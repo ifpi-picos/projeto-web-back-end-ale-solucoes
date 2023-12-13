@@ -1,5 +1,6 @@
 import { Router, response } from 'express';
 import BudgetsController from '../../modules/budgets/controllers/budgets.controller';
+import authMiddleware from '../../shared/middlewares/verifyToken.middleware';
 
 const router = Router();
 router.post('/create', BudgetsController.create);

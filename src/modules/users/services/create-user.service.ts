@@ -10,12 +10,13 @@ export class CreateUserService {
         if (userAlreadyExists) {
             throw new Error('Usuário já cadastrado, tente novamente!');
         }
-
+        console.log(user)
         let token = generateToken(user.company_document, user.email, '12345')
         user.token = token;
         const userCreated = await this.usersRepository.create(
           user
         );
+        
         return userCreated;
     }
 

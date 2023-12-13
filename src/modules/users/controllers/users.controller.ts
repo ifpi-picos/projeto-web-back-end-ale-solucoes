@@ -9,6 +9,7 @@ import { DeleteUserByDocumentService } from '../services/delete-user-by-document
 import { UpdateUserByDocumentService } from '../services/update-user-by-document.service';
 import { LoginUserService } from '../services/login-user.service';
 import { VerifyTokenUserService } from '../services/verify-token-user.service';
+import bcrypt from 'bcrypt';
 
 class UsersController {
   static async login(request: Request, response: Response) {
@@ -16,7 +17,7 @@ class UsersController {
 
     const {company_document, password} = request.body;
     let {jwtsecret} = request.headers;
-    
+    jwtsecret = '12345'
     const result = await loginUserService.perform(password, company_document, jwtsecret as string);
 
     response.status(HttpCode.OK).json({
@@ -29,7 +30,9 @@ class UsersController {
   
   static async create(request: Request, response: Response) {
     const  user  = request.body as TUser;
-    const createUsersService = new CreateUserService(new UsersDBRepository());
+    const createUsersService = new CreateUserService(new UsersDBRepository()); 
+    user.password = await bcrypt.hash(user.password, 10);
+
     const result = await createUsersService.perform(user);
 
     response.status(HttpCode.OK).json({
@@ -100,9 +103,9 @@ class UsersController {
   static async verifyToken(request: Request, response: Response){
     const verifyTokenUserService = new VerifyTokenUserService(new UsersDBRepository());
     const {company_document} = request.params
-    let {jwtsecret} = request.headers;
+    let {token} = request.headers;
 
-    const result = await verifyTokenUserService.perform(jwtsecret as string, company_document);
+    const result = await verifyTokenUserService.perform(token as string, company_document);
     
     response.status(HttpCode.OK).json({
       response: 'successfull',

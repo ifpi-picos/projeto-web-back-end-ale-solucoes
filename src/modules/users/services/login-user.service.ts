@@ -1,6 +1,7 @@
 import { UsersRepository } from "../../../shared/repositories/users.repository"
 import { generateToken } from "../../../shared/utils/generate-token"
-
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 export class LoginUserService  {
     constructor(private readonly usersRepository: UsersRepository) {}
 
@@ -8,16 +9,23 @@ export class LoginUserService  {
         const user = await this.usersRepository.getUserByDocument(company_document) 
         
         if(!user){
-          throw new Error('Usuário na encontrado, tente novamente!')
+          throw new Error('Usuário não encontrado, tente novamente!')
+
         }
-        if(user.company_document !== company_document || user.password !== password){
-          throw new Error('Email ou senha inválidos, tente novamente!')
+        
+        const verifyPassword = await bcrypt.compare(password, user.password)
+
+        if(!verifyPassword){
+          throw new Error('Usuário ou senha incorreta, tente novamente!')
         }
 
-        let token = generateToken(company_document, user.email, jwtSecret)
+        const token = jwt.sign({ document: user.company_document }, jwtSecret, {
+          expiresIn: "1h",
+        });
+
 
         await this.usersRepository.saveToken(company_document, token);
-
+      
         const result = {
           document: user.company_document,
           token: token
