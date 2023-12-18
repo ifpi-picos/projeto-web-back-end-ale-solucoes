@@ -1,5 +1,4 @@
 import { Response } from 'express';
-import { logger } from '../utils/logger';
 import { AppError, HttpCode } from './AppError';
 
 class ErrorHandler {
@@ -20,7 +19,6 @@ class ErrorHandler {
   }
 
   private handleTrustedError(error: AppError, response: Response): void {
-    logger.error(error.message);
     response
       .status(error.httpCode)
       .json({ response: 'error', message: error.message, data: {} });
@@ -36,7 +34,6 @@ class ErrorHandler {
         .json({ response: 'error', message: 'Internal server error' });
     }
 
-    logger.error('Application encountered an untrusted error.');
     console.log(error);
 
     // exitHandler.handleExit(1);
