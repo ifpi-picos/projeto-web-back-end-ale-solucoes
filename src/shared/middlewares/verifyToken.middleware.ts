@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 const secret: string = '12345';
 
 const authMiddleware = (req: Request, res: Response, next: () => void) => {
-  console.log(req.headers.authorization)
   const token = req.headers.authorization;
 
   if (!token) {

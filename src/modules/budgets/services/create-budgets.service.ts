@@ -9,8 +9,9 @@ export class CreateBudgetService {
 
   public async perform(budget: TBudget) {
     const body: any = [];
+    console.log(budget)
     for (let i = 0; i < budget.products.length; i++) {
-  
+      
       const value_total = budget.products[i].value * budget.products[i].quantity;
 
       body.push([budget.products[i].code, budget.products[i].product_name, budget.products[i].unit_of_measurement, budget.products[i].quantity, budget.products[i].value, value_total]);

@@ -57,9 +57,9 @@ class UsersController {
   static async listOne(request: Request, response: Response){
     
     const getUserByDocumentService = new GetUserByDocumentService(new UsersDBRepository());
-
-    const {id} = request.params;
   
+    const {id} = request.params;
+    
     const result =  await getUserByDocumentService.perform(Number(id))
 
     response.status(HttpCode.OK).json({

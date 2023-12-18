@@ -29,20 +29,18 @@ export class UsersDBRepository implements UsersRepository {
           .select<TUser>('*')
           .from('users')
           .where('id', userId)
-          .where('deleted', false)
-          .first();
+          .where('deleted', false);
     
         return data;
        }
        async getUserByDocument(company_document: string): Promise<TUser | undefined> {
         const data = await this.conn('users')
-          .select<TUser>('*')
+          .select<TUser[]>('*')
           .from('users')
           .where('company_document', company_document)
-          .where('deleted', false)
-          .first();
+          .where('deleted', false);
     
-        return data;
+        return data[0];
        }
 
     async deleteUserByDocument(company_document: string): Promise<Boolean> {
@@ -51,7 +49,6 @@ export class UsersDBRepository implements UsersRepository {
           .from('users')
           .where('company_document', company_document)
           .where('deleted', false)
-          .first()
           .delete();
     
         return data ? true : false ;
@@ -64,7 +61,6 @@ export class UsersDBRepository implements UsersRepository {
           .from('users')
           .where('company_document', company_document)
           .where('deleted', false)
-          .first()
           .update(data);
 
         return result ? true : false ;
@@ -76,7 +72,6 @@ export class UsersDBRepository implements UsersRepository {
           .from('users')
           .where('company_document', company_document)
           .where('deleted', false)
-          .first()
           .update('token', token);
        }
     async verifyTokenUser(company_document: string): Promise<TUser | undefined> {
@@ -84,8 +79,7 @@ export class UsersDBRepository implements UsersRepository {
           .select<TUser>('*')
           .from('users')
           .where('company_document', company_document)
-          .where('deleted', false)
-          .first()
+          .where('deleted', false);
     
         return data;
        }

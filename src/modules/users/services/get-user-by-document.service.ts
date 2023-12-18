@@ -6,6 +6,8 @@ export class GetUserByDocumentService {
     public async perform(userId: number){
         const users = await this.usersRepository.getUserById(userId)
 
+        console.log(users, 'uuuuuuuuuuuuserrrrasd')
+
         return users;
       }
 }

@@ -7,14 +7,14 @@ export class LoginUserService  {
 
     public async perform(password: string, company_document: string, jwtSecret: string){
         const user = await this.usersRepository.getUserByDocument(company_document) 
-        
+        console.log(user, 'user')
         if(!user){
           throw new Error('Usuário não encontrado, tente novamente!')
 
         }
         
         const verifyPassword = await bcrypt.compare(password, user.password)
-
+        console.log(verifyPassword, 'verifyPassword')
         if(!verifyPassword){
           throw new Error('Usuário ou senha incorreta, tente novamente!')
         }
@@ -28,7 +28,8 @@ export class LoginUserService  {
       
         const result = {
           document: user.company_document,
-          token: token
+          token: token,
+          id: user.id,
         }
 
         return result;

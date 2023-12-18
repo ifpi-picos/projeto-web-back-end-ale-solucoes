@@ -3,7 +3,7 @@ import BudgetsController from '../../modules/budgets/controllers/budgets.control
 import authMiddleware from '../../shared/middlewares/verifyToken.middleware';
 
 const router = Router();
-router.post('/create', BudgetsController.create);
+router.post('/create', authMiddleware, BudgetsController.create);
 router.get('/list-all', BudgetsController.listAll);
 router.delete('/delete/:id', BudgetsController.delete);
 router.put('/update/:id', BudgetsController.update);
