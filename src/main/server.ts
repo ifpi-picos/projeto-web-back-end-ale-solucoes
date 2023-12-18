@@ -7,7 +7,7 @@ const port = 3010
 export const app = setupApp();
 
 export const server = app.listen(port, () => {
-  logger.info(`Server running at: http://localhost:${port}`);
+  logger.info(`Server running at: http://localhost:${process.env.PORT}`);
 });
 
 // terminator
